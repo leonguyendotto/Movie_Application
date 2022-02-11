@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Movie</h2>
+<form action="/Movie/Create" method="POST">
+    <div>
+        <label>Movie Title:</label> <input type="text" name="MovieTitle" />
+    </div>
+    <div>
+        <label>Movie Origin:</label> <input type="text" name="MovieOrigin" />
+    </div>
+    <div>
+        <label>Review ID:</label> <input type="number" name="ReviewID" />
+    </div>
+    <div>
+        <input type="submit" value="Add Movie" />
+    </div>
+</form>
+

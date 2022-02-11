@@ -6,12 +6,14 @@ using System.Web.Mvc;
 using System.Net.Http;
 using System.Diagnostics;
 using Movie_App_2._0.Models;
+using System.Web.Script.Serialization;
 
 namespace Movie_App_2._0.Controllers
 {
     public class MovieController : Controller
     {
         private static readonly HttpClient client;
+        private JavaScriptSerializer jss = new JavaScriptSerializer();
         static MovieController()
         {
             client = new HttpClient();
@@ -21,10 +23,14 @@ namespace Movie_App_2._0.Controllers
         public ActionResult List()
         {
 
-            
+            //objective: communicate with our animal data api to retrieve a list of movies
+            //curl https://localhost:44375/api/moviedata/listmovies
+
             string url = "listmovies";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
+
+            // debug
             Debug.WriteLine("The response code is");
             Debug.WriteLine(response.StatusCode);
 
@@ -37,10 +43,13 @@ namespace Movie_App_2._0.Controllers
         public ActionResult Details(int id)
         {
 
-            
+            //objective: communicate with our animal data api to retrieve one movie
+            //curl https://localhost:44375/api/moviedata/findmovie/{id}
+
             string url = "findmovie/"+id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
+            // debug
             Debug.WriteLine("The response code is");
             Debug.WriteLine(response.StatusCode);
 
@@ -51,26 +60,46 @@ namespace Movie_App_2._0.Controllers
             return View(selectedmovies);
         }
 
-        // GET: Movie/Create
-        public ActionResult Create()
+        public ActionResult Error ()
+        {
+            return View();
+        }
+
+        // GET: Movie/New
+        public ActionResult New()
         {
             return View();
         }
 
         // POST: Movie/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Movie movie)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            Debug.WriteLine("the json payload is:");
+            //Debug.WriteLine(movie.MovieTitle);
+            //Objective: add a new movie into our system using the API
+            //Curl: https://localhost:44375/api/moviedata/addmovie
+            string url = "addmovie";
 
-                return RedirectToAction("Index");
-            }
-            catch
+            string jsonpayload = jss.Serialize(movie);
+
+            Debug.WriteLine(jsonpayload);
+
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+
+
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
             }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+
         }
 
         // GET: Movie/Edit/5
