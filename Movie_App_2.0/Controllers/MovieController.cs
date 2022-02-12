@@ -17,7 +17,7 @@ namespace Movie_App_2._0.Controllers
         static MovieController()
         {
             client = new HttpClient();
-            client.BaseAddress = new Uri("https://localhost:44375/api/moviedata/");
+            client.BaseAddress = new Uri("https://localhost:44375/api/");
         }
         // GET: Movie/List
         public ActionResult List()
@@ -26,7 +26,7 @@ namespace Movie_App_2._0.Controllers
             //objective: communicate with our animal data api to retrieve a list of movies
             //curl https://localhost:44375/api/moviedata/listmovies
 
-            string url = "listmovies";
+            string url = "moviedata/listmovies";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
 
@@ -46,7 +46,7 @@ namespace Movie_App_2._0.Controllers
             //objective: communicate with our animal data api to retrieve one movie
             //curl https://localhost:44375/api/moviedata/findmovie/{id}
 
-            string url = "findmovie/"+id;
+            string url = "moviedata/findmovie/"+id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             // debug
@@ -68,6 +68,8 @@ namespace Movie_App_2._0.Controllers
         // GET: Movie/New
         public ActionResult New()
         {
+            //information about all reviews in the system
+            //GET api/reviewsdata/listreviews
             return View();
         }
 
@@ -79,7 +81,7 @@ namespace Movie_App_2._0.Controllers
             //Debug.WriteLine(movie.MovieTitle);
             //Objective: add a new movie into our system using the API
             //Curl: https://localhost:44375/api/moviedata/addmovie
-            string url = "addmovie";
+            string url = "moviedata/addmovie";
 
             string jsonpayload = jss.Serialize(movie);
 
@@ -105,45 +107,61 @@ namespace Movie_App_2._0.Controllers
         // GET: Movie/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+
+            string url = "moviedata/findmovie/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            MovieDto selectedmovie = response.Content.ReadAsAsync<MovieDto>().Result;
+            return View(selectedmovie);
         }
 
-        // POST: Movie/Edit/5
+        // POST: Movie/Update/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Update(int id, Movie movie)
         {
-            try
-            {
-                // TODO: Add update logic here
+            string url = "moviedata/updatemovie/" + id;
+            string jsonpayload = jss.Serialize(movie);
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            Debug.WriteLine(content);
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
 
         // GET: Movie/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteConfirm(int id)
         {
-            return View();
+            string url = "moviedata/findmovie/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            MovieDto selectedmovie = response.Content.ReadAsAsync<MovieDto>().Result;
+            return View(selectedmovie);
         }
 
         // POST: Movie/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            string url = "moviedata/deleteanimal/" + id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
             }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+
         }
     }
 }

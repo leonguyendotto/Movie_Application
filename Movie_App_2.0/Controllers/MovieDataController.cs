@@ -16,6 +16,7 @@ namespace Movie_App_2._0.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+
         // GET: api/MovieData/ListMovies
         [HttpGet]
         public IEnumerable<MovieDto> ListMovies()
@@ -91,8 +92,20 @@ namespace Movie_App_2._0.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
-        // POST: api/MovieData/AddMovie
+        /// <summary>
+        /// Add an movie to the system 
+        /// </summary>
+        /// <param name="movie">Json form data of an movie</param>
+        /// <returns>
+        /// HEADER: 201 (CREATED) - if a create successed 
+        /// CONTENT: Movie ID, Movie Data
+        /// or
+        /// HEADER: 400 (BAD REQUEST) - if a create failed
+        /// </returns>
+        /// <example>
+        /// POST: api/moviedata/addmovie
+        /// FORM DATA: Movie JSON Object
+        /// </example>
         [ResponseType(typeof(Movie))]
         [HttpPost]
         public IHttpActionResult AddMovie(Movie movie)

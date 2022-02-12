@@ -1,0 +1,16 @@
+﻿@model Movie_App_2._0.Models.MovieDto
+
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+<h2>Are you sure you want to delete this movie?</h2>
+<a href="/Movie/List">Cancel</a>
+<h2>@Model.MovieTitle</h2>
+<div>Country: @Model.MovieOrigin (Origin)</div>
+<div>Review: @Model.ReviewTitle</div>
+<form action="/Movie/Delete/@Model.MovieID" method="POST">
+    <input type="submit" value="Confirm Delete" />
+
+</form>
+

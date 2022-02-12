@@ -275,6 +275,7 @@
     <Content Include="Views\Movie\Details.cshtml" />
     <Content Include="Views\Movie\New.cshtml" />
     <Content Include="Views\Movie\Error.cshtml" />
+    <Content Include="Views\Movie\DeleteConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
