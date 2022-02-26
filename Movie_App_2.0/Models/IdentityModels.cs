@@ -29,6 +29,8 @@ namespace Movie_App_2._0.Models
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Reviews> Reviews { get; set; }
 
+        public DbSet<Reviewer> Reviewers { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

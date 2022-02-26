@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Movie_App_2._0.Models.ReviewDto>
 @{
     ViewBag.Title = "Create";
 }
@@ -12,7 +12,14 @@
         <label>Movie Origin:</label> <input type="text" name="MovieOrigin" />
     </div>
     <div>
-        <label>Review ID:</label> <input type="number" name="ReviewID" />
+        <label>Reviews:</label>
+        <select name="ReviewID">
+            @foreach (var review in Model)
+            {
+                <option value="@review.ReviewID">@review.ReviewTitle</option>
+
+            }
+        </select>
     </div>
     <div>
         <input type="submit" value="Add Movie" />

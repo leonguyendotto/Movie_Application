@@ -31,5 +31,7 @@ namespace Movie_App_2._0.Models
         public string MovieTitle { get; set; }
         public string MovieOrigin { get; set; }
         public string ReviewTitle { get; set; }
+
+        public int ReviewID { get; set; }
     }
 }

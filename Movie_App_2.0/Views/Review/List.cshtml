@@ -5,9 +5,10 @@
 
 <h2>List</h2>
 <a href="/Review/New">New Review</a>
-@foreach (var review in Model)
+@foreach (var Review in Model)
 {
-    <h2><a href="/Review/Details/@review.ReviewID"> @review.ReviewTitle</a></h2>
-    <div>Already Posted: @review.AlreadyPosted (status)</div>
-    
+    <h2><a href="/Species/Details/@Review.ReviewID">@Review.ReviewTitle</a></h2>
+    <div>Endangered: @Review.AlreadyPosted</div>
+
 }
+

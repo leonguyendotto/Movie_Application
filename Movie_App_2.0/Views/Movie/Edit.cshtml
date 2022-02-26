@@ -1,0 +1,38 @@
+﻿@model Movie_App_2._0.Models.ViewModels.UpdateMovie
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Update Movie</h2>
+<form action="/Movie/Update/@Model.SelectedMovie.MovieID" method="POST">
+    <div style="display:none;">
+        @* Pass through the animal ID *@
+        <input type="text" name="MovieID" value="@Model.SelectedMovie.MovieID" />
+    </div>
+    <div>
+        <label>Name:</label> <input type="text" name="MovieTitle" value="@Model.SelectedMovie.MovieTitle" />
+    </div>
+    <div>
+        <label>Origins:</label> <input type="number" name="MovieOrigin" value="@Model.SelectedMovie.MovieOrigin" />
+    </div>
+    <div>
+        <label>Review ID:</label>
+
+        <select name="ReviewID">
+            @foreach (var review in Model.ReviewOptions)
+            {
+                string selected = "";
+                if (review.ReviewID == Model.SelectedMovie.ReviewID)
+                {
+                    selected = "selected";
+                }
+                <option value="@review.ReviewID" @selected>@review.ReviewTitle</option>
+
+            }
+        </select>
+    </div>
+    <div>
+        <input type="submit" value="Update Movie" />
+
+    </div>
+</form>

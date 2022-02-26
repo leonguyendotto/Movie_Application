@@ -1,12 +1,38 @@
-﻿@model Movie_App_2._0.Models.MovieDto
+﻿@model Movie_App_2._0.Models.ViewModels.DetailsMovie
 @{
     ViewBag.Title = "View";
 }
 
-<h2>View</h2>
-
 
 <a href="/Movie/List">Go back to list</a>
-<h2>@Model.MovieTitle</h2>
-<div>Country: @Model.MovieOrigin (Origin)</div>
-<div>Comment: @Model.ReviewTitle</div>
+<br />
+<a href="/Movie/Edit/@Model.SelectedMovie.MovieID">Update</a>
+<br />
+<a style="color:#ab2020;" href="/Movie/DeleteConfirm/@Model.SelectedMovie.MovieID">Delete</a>
+<h2>@Model.SelectedMovie.MovieTitle</h2>
+<div>Country: @Model.SelectedMovie.MovieOrigin kg</div>
+<div>Rating: @Model.SelectedMovie.ReviewTitle</div>
+
+<div>
+    <h2>Reviewers Responsible for @Model.SelectedMovie.MovieTitle:</h2>
+    @foreach (var reviewer in Model.ResponsibleReviewers)
+    {
+
+        <a href="/Reviewer/Details/@reviewer.ReviewerID">@reviewer.ReviewerFirstName @reviewer.ReviewerLastName</a> 
+        <a style="color:#ab2020;" href="/Movie/Unassociate/@Model.SelectedMovie.MovieID?ReviewerID=@reviewer.ReviewerID">[x]</a><br />
+    }
+
+    <div>
+        <h4>Add new Reviewer to rate for @Model.SelectedMovie.MovieTitle</h4>
+        <form method="POST" action="/Animal/Associate/@Model.SelectedMovie.MovieID">
+            <select name="ReviewerID">
+                @foreach (var reviewer in Model.AvailableReviewers)
+                {
+                    <option value="@reviewer.ReviewerID">@reviewer.ReviewerFirstName @reviewer.ReviewerLastName</option>
+                }
+
+            </select>
+            <input type="submit" value="Associate Reviewer" />
+        </form>
+    </div>
+</div>

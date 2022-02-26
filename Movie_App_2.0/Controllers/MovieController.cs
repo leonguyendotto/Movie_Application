@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Net.Http;
 using System.Diagnostics;
 using Movie_App_2._0.Models;
+using Movie_App_2._0.Models.ViewModels;
 using System.Web.Script.Serialization;
 
 namespace Movie_App_2._0.Controllers
@@ -42,7 +43,7 @@ namespace Movie_App_2._0.Controllers
         // GET: Movie/Details/5
         public ActionResult Details(int id)
         {
-
+            DetailsMovie ViewModel = new DetailsMovie();
             //objective: communicate with our animal data api to retrieve one movie
             //curl https://localhost:44375/api/moviedata/findmovie/{id}
 
@@ -53,12 +54,61 @@ namespace Movie_App_2._0.Controllers
             Debug.WriteLine("The response code is");
             Debug.WriteLine(response.StatusCode);
 
-            MovieDto selectedmovies = response.Content.ReadAsAsync<MovieDto>().Result;
+            MovieDto selectedMovies = response.Content.ReadAsAsync<MovieDto>().Result;
             Debug.WriteLine("movie received:");
-            Debug.WriteLine(selectedmovies.MovieTitle);
+            Debug.WriteLine(selectedMovies.MovieTitle);
 
-            return View(selectedmovies);
+            ViewModel.SelectedMovie = SelectedMovie;
+
+            //show associated keepers with this animal
+            url = "reviewerdata/listreviewersformovie/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<ReviewDto> ResponsibleKeepers = response.Content.ReadAsAsync<IEnumerable<ReviewDto>>().Result;
+
+            ViewModel.ResponsibleReviewers = ResponsibleReviewers;
+
+            url = "reviewerdata/listreviewersnotcaringformovie/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<ReviewDto> AvailableKeepers = response.Content.ReadAsAsync<IEnumerable<ReviewDto>>().Result;
+
+            ViewModel.AvailableReviewers = AvailableReviewers;
+
+
+            return View(ViewModel);
         }
+
+
+        //POST: Movie/Associate/{movielid}
+        [HttpPost]
+        public ActionResult Associate(int id, int ReviewerID)
+        {
+            Debug.WriteLine("Attempting to associate movie :" + id + " with reviewer " + ReviewerID);
+
+            //call our api to associate animal with keeper
+            string url = "moviedata/associatemoviewithreviewer/" + id + "/" + ReviewerID;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            return RedirectToAction("Details/" + id);
+        }
+
+        //Get: Movie/UnAssociate/{id}?ReviewerID={ReviewerID}
+        [HttpGet]
+        public ActionResult UnAssociate(int id, int ReviewerID)
+        {
+            Debug.WriteLine("Attempting to unassociate animal :" + id + " with reviewer: " + ReviewerID);
+
+            //call our api to associate animal with keeper
+            string url = "moviedata/unassociatemoviewithreviewer/" + id + "/" + ReviewerID;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            return RedirectToAction("Details/" + id);
+        }
+
+
 
         public ActionResult Error ()
         {
@@ -68,9 +118,14 @@ namespace Movie_App_2._0.Controllers
         // GET: Movie/New
         public ActionResult New()
         {
-            //information about all reviews in the system
-            //GET api/reviewsdata/listreviews
-            return View();
+            //information about all species in the system.
+            //GET api/speciesdata/listspecies
+
+            string url = "reviewdata/listreview";
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            IEnumerable<ReviewDto> ReviewOptions = response.Content.ReadAsAsync<IEnumerable<ReviewDto>>().Result;
+
+            return View(ReviewOptions);
         }
 
         // POST: Movie/Create
@@ -107,11 +162,25 @@ namespace Movie_App_2._0.Controllers
         // GET: Movie/Edit/5
         public ActionResult Edit(int id)
         {
+            UpdateMovie ViewModel = new UpdateMovie();
 
+
+            //the existing movie information
             string url = "moviedata/findmovie/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             MovieDto selectedmovie = response.Content.ReadAsAsync<MovieDto>().Result;
-            return View(selectedmovie);
+            ViewModel.SelectedMovie = SelectedMovie;
+
+
+            // all reviews to choose from when updating this movie
+            //the existing movie information
+            url = "reviewdata/listreview/";
+            response = client.GetAsync(url).Result;
+            IEnumerable<ReviewDto> SpeciesOptions = response.Content.ReadAsAsync<IEnumerable<ReviewDto>>().Result;
+
+            ViewModel.ReviewOptions = ReviewOptions;
+
+            return View(ViewModel);
         }
 
         // POST: Movie/Update/5

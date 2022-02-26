@@ -47,72 +47,128 @@ namespace Movie_App_2._0.Controllers
         // GET: Reviewer/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            DetailsReviewer ViewModel = new DetailsReviewer();
+
+            //objective: communicate with our Keeper data api to retrieve one Keeper
+            //curl https://localhost:44324/api/Keeperdata/findkeeper/{id}
+
+            string url = "reviwerdata/findReviewer/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            Debug.WriteLine("The response code is ");
+            Debug.WriteLine(response.StatusCode);
+
+            ReviewerDto SelectedReviwer = response.Content.ReadAsAsync<ReviewerDto>().Result;
+           
+
+            ViewModel.SelectedReviwer = SelectedReviwer;
+
+            //show all animals under the care of this keeper
+            url = "animaldata/listanimalsforkeeper/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<MovieDto> KeptMovies = response.Content.ReadAsAsync<IEnumerable<MovieDto>>().Result;
+
+            ViewModel.KeptMovies = KeptMovies;
+
+
+            return View(ViewModel);
         }
 
-        // GET: Reviewer/Create
-        public ActionResult Create()
+
+        // GET: Reviewer/New
+        public ActionResult Error()
         {
+
             return View();
         }
 
         // POST: Reviewer/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Reviewer Reviewer)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            Debug.WriteLine("the json payload is :");
+            //Debug.WriteLine(Keeper.KeeperName);
+            //objective: add a new Keeper into our system using the API
+            //curl -H "Content-Type:application/json" -d @Keeper.json https://localhost:44324/api/Keeperdata/addKeeper 
+            string url = "reviewerdata/addreviewer";
 
-                return RedirectToAction("Index");
-            }
-            catch
+
+            string jsonpayload = jss.Serialize(Reviewer);
+            Debug.WriteLine(jsonpayload);
+
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
             }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+
+
         }
 
         // GET: Reviewer/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            string url = "reviewerdata/findreviewer" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            ReviewerDto selectedReviewer = response.Content.ReadAsAsync<ReviewerDto>().Result;
+            return View(selectedReviewer);
         }
 
-        // POST: Reviewer/Edit/5
+        // POST: Reviewer/Update/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Update(int id, Reviewer Keeper)
         {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
+            string url = "reviewerdata/updateviewer/" + id;
+            string jsonpayload = jss.Serialize(Keeper);
+            HttpContent content = new StringContent(jsonpayload);
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            Debug.WriteLine(content);
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
+
+
 
         // GET: Reviewer/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteConfirm(int id)
         {
-            return View();
+            string url = "reviewerdata/findreviewer/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            ReviewerDto selectedReviewer = response.Content.ReadAsAsync<ReviewerDto>().Result;
+            return View(selectedReviewer);
         }
 
         // POST: Reviewer/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            string url = "reviewerdata/deletereviewer/" + id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
     }

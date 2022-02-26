@@ -94,7 +94,7 @@ namespace Movie_App_2._0.Controllers
         }
         // POST: Review/Create
         [HttpPost]
-        public ActionResult Create(Review Review)
+        public ActionResult Create(Reviews Review)
         {
             Debug.WriteLine("the json payload is :");
             //Debug.WriteLine(Species.SpeciesName);
@@ -131,7 +131,7 @@ namespace Movie_App_2._0.Controllers
 
         // POST: Review/Update/5
         [HttpPost]
-        public ActionResult Update(int id, Review Review)
+        public ActionResult Update(int id, Reviews Review)
         {
 
             string url = "reviewdata/updatereview/" + id;
