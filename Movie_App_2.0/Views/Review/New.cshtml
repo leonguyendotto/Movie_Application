@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create Review</h2>
+<form action="/Review/Create" method="POST">
+    <div>
+        <label>Review Title:</label> <input type="text" name="ReviewTitle" />
+    </div>
+    <div>
+        <label>Already Posted:</label>
+        <input type="checkbox" name="AlreadyPosted" value="true" />
+    </div>
+    
+    <div>
+        <input type="submit" value="Create Review" />
+    </div>
+</form>
+

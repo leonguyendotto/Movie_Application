@@ -16,4 +16,14 @@ namespace Movie_App_2._0.Models
         //A reviewer can watch many movies
         public ICollection<Movie> Movies { get; set; }
     }
+
+
+    public class ReviewerDto
+    {
+        public int ReviewerID { get; set; }
+        public string ReviewerFirstName { get; set; }
+        public string ReviewerLastName { get; set; }
+
+
+    }
 }

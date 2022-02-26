@@ -185,6 +185,8 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MovieController.cs" />
     <Compile Include="Controllers\MovieDataController.cs" />
+    <Compile Include="Controllers\ReviewController.cs" />
+    <Compile Include="Controllers\ReviewerController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -276,9 +278,16 @@
     <Content Include="Views\Movie\New.cshtml" />
     <Content Include="Views\Movie\Error.cshtml" />
     <Content Include="Views\Movie\DeleteConfirm.cshtml" />
+    <Content Include="Views\Review\DeleteConfirm.cshtml" />
+    <Content Include="Views\Review\Details.cshtml" />
+    <Content Include="Views\Review\Error.cshtml" />
+    <Content Include="Views\Review\List.cshtml" />
+    <Content Include="Views\Review\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Keeper\" />
+    <Folder Include="Views\Reviewer\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

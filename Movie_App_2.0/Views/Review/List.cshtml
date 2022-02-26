@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Movie_App_2._0.Models.ReviewDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+<a href="/Review/New">New Review</a>
+@foreach (var review in Model)
+{
+    <h2><a href="/Review/Details/@review.ReviewID"> @review.ReviewTitle</a></h2>
+    <div>Already Posted: @review.AlreadyPosted (status)</div>
+    
+}
