@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Movie_App_2._0.Models.ReviewerDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List</h2>
+<a href="/Reviewer/New">New Reviewer</a>
+@foreach (var Reviewer in Model)
+{
+    <<h2><a href="/Reviewer/Details/@Reviewer.ReviewerID">@Reviewer.ReviewerLastName, @Reviewer.ReviewerFirstName></a></h2>
+
+}

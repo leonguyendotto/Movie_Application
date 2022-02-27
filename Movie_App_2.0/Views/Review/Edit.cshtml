@@ -1,0 +1,25 @@
+﻿@model Movie_App_2._0.Models.ReviewDto
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Update Review</h2>
+<form action="/Review/Update/@Model.ReviewID" method="POST">
+    <div style="display:none;">
+        @* Pass through the Review ID *@
+        <input type="text" name="ReviewID" value="@Model.ReviewID" />
+    </div>
+    <div>
+        <label>Name:</label> <input type="text" name="ReviewTitle" value="@Model.ReviewTitle" />
+    </div>
+    <div>
+        <label>Status:</label>
+        <input type="checkbox" name="AlreadyPosted" value="true"
+               @(Model.AlreadyPosted ? "checked" : "") />
+    </div>
+    <div>
+        <input type="submit" value="Update Review" />
+
+    </div>
+</form>
+

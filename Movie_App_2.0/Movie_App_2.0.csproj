@@ -289,13 +289,20 @@
     <Content Include="Views\Review\Details.cshtml" />
     <Content Include="Views\Review\Error.cshtml" />
     <Content Include="Views\Review\List.cshtml" />
-    <Content Include="Views\Review\Create.cshtml" />
+    <Content Include="Views\Review\New.cshtml" />
+    <Content Include="Views\Reviewer\DeleteConfirm.cshtml" />
+    <Content Include="Views\Reviewer\Error.cshtml" />
+    <Content Include="Views\Reviewer\Edit.cshtml" />
+    <Content Include="Views\Review\Edit.cshtml" />
+    <Content Include="Views\Reviewer\List.cshtml" />
+    <Content Include="Views\Reviewer\Create.cshtml" />
+    <Content Include="Views\Reviewer\Details.cshtml" />
+    <Content Include="Views\Reviewer\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Keeper\" />
     <Folder Include="Views\ReviewData\" />
-    <Folder Include="Views\Reviewer\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

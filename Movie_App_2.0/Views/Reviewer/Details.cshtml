@@ -1,0 +1,24 @@
+﻿@model Movie_App_2._0.Models.ViewModels.DetailsReviewer
+
+
+@{
+    ViewBag.Title = "View";
+}
+
+<a href="/Reviewer/List">Go back to list</a>
+<br />
+<a href="/Reviewer/Edit/@Model.SelectedReviewer.ReviewerID">Update</a>
+<br />
+<a style="color:#ab2020;" href="/Reviewer/DeleteConfirm/@Model.SelectedReviewer.ReviewerID">Delete</a>
+<h2>@Model.SelectedReviewer.ReviewerLastName @Model.SelectedReviewer.ReviewerFirstName</h2>
+
+
+
+<div>
+    <h3>Responsible for:</h3>
+    @foreach (var movie in Model.KeptMovies)
+    {
+        <a href="/Animal/Details/@movie.MovieID">@movie.MovieTitle</a><br />
+
+    }
+</div>

@@ -25,28 +25,15 @@ namespace Movie_App_2._0.Controllers
         //GET: Review/List
         public ActionResult List()
         {
-            //objective: communicate with our Species data api to retrieve a list of Speciess
-            //curl https://localhost:44375/api/Reviewdata/listReviews
-
-
+   
             string url = "reviewdata/listreviews";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            //Debug.WriteLine("The response code is ");
-            //Debug.WriteLine(response.StatusCode);
-
             IEnumerable<ReviewDto> Review = response.Content.ReadAsAsync<IEnumerable<ReviewDto>>().Result;
-            //Debug.WriteLine("Number of Speciess received : ");
-            //Debug.WriteLine(Speciess.Count());
+         
 
 
             return View(Review);
-        }
-
-        // GET: Review/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
         }
 
         // GET: Review/Create

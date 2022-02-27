@@ -1,0 +1,11 @@
+﻿@model Movie_App_2._0.Models.ReviewerDto
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+<h2>Are you sure you want to delete this reviewer?</h2>
+<a href="/Reviewer/List">Cancel</a>
+<h3>Name: @Model.ReviewerFirstName @Model.ReviewerLastName</h3>
+<form action="/Reviewer/Delete/@Model.ReviewerID" method="POST">
+    <input type="submit" value="Confirm Delete" />
+</form>

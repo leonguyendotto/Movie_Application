@@ -54,22 +54,22 @@ namespace Movie_App_2._0.Controllers
             Debug.WriteLine("The response code is");
             Debug.WriteLine(response.StatusCode);
 
-            MovieDto selectedMovies = response.Content.ReadAsAsync<MovieDto>().Result;
+            MovieDto SelectedMovie = response.Content.ReadAsAsync<MovieDto>().Result;
             Debug.WriteLine("movie received:");
-            Debug.WriteLine(selectedMovies.MovieTitle);
+            Debug.WriteLine(SelectedMovie.MovieTitle);
 
             ViewModel.SelectedMovie = SelectedMovie;
 
             //show associated keepers with this animal
             url = "reviewerdata/listreviewersformovie/" + id;
             response = client.GetAsync(url).Result;
-            IEnumerable<ReviewDto> ResponsibleKeepers = response.Content.ReadAsAsync<IEnumerable<ReviewDto>>().Result;
+            IEnumerable<ReviewerDto> ResponsibleReviewers = response.Content.ReadAsAsync<IEnumerable<ReviewerDto>>().Result;
 
             ViewModel.ResponsibleReviewers = ResponsibleReviewers;
 
             url = "reviewerdata/listreviewersnotcaringformovie/" + id;
             response = client.GetAsync(url).Result;
-            IEnumerable<ReviewDto> AvailableKeepers = response.Content.ReadAsAsync<IEnumerable<ReviewDto>>().Result;
+            IEnumerable<ReviewerDto> AvailableReviewers = response.Content.ReadAsAsync<IEnumerable<ReviewerDto>>().Result;
 
             ViewModel.AvailableReviewers = AvailableReviewers;
 
@@ -168,7 +168,7 @@ namespace Movie_App_2._0.Controllers
             //the existing movie information
             string url = "moviedata/findmovie/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-            MovieDto selectedmovie = response.Content.ReadAsAsync<MovieDto>().Result;
+            MovieDto SelectedMovie = response.Content.ReadAsAsync<MovieDto>().Result;
             ViewModel.SelectedMovie = SelectedMovie;
 
 
@@ -176,7 +176,7 @@ namespace Movie_App_2._0.Controllers
             //the existing movie information
             url = "reviewdata/listreview/";
             response = client.GetAsync(url).Result;
-            IEnumerable<ReviewDto> SpeciesOptions = response.Content.ReadAsAsync<IEnumerable<ReviewDto>>().Result;
+            IEnumerable<ReviewDto> ReviewOptions = response.Content.ReadAsAsync<IEnumerable<ReviewDto>>().Result;
 
             ViewModel.ReviewOptions = ReviewOptions;
 

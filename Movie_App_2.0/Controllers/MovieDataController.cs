@@ -149,7 +149,7 @@ namespace Movie_App_2._0.Controllers
         /// </example>
         [HttpPost]
         [Route("api/MovieData/UnAssociateMovieWithReviewer/{movieid}/{reviwerid}")]
-        public IHttpActionResult UnAssociateAnimalWithKeeper(int animalid, int keeperid)
+        public IHttpActionResult UnAssociateAnimalWithKeeper(int movieid, int reviewerid)
         {
 
             Movie SelectedMovie = db.Movies.Include(a => a.Reviewers).Where(a => a.MovieID == movieid).FirstOrDefault();

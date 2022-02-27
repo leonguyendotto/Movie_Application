@@ -1,0 +1,24 @@
+﻿@model Movie_App_2._0.Models.ReviewerDto
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Update Reviewer</h2>
+<form action="/Reviewer/Update/@Model.ReviewerID" method="POST">
+    <div style="display:none;">
+        @* Pass through the Reviewer ID *@
+        <input type="text" name="ReviewerID" value="@Model.ReviewerID" />
+    </div>
+    <div>
+        <label>First Name:</label> <input type="text" name="ReviewerFirstName" value="@Model.ReviewerFirstName" />
+    </div>
+    <div>
+        <label>Last Name:</label> <input type="text" name="ReviewerLastName" value="@Model.ReviewerLastName" />
+    </div>
+
+    <div>
+        <input type="submit" value="Update Reviewer" />
+
+    </div>
+</form>
+
