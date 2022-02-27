@@ -18,16 +18,7 @@ namespace Movie_App_2._0.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        /// <summary>
-        /// Returns all Speciess in the system.
-        /// </summary>
-        /// <returns>
-        /// HEADER: 200 (OK)
-        /// CONTENT: all Speciess in the database, including their associated species.
-        /// </returns>
-        /// <example>
-        /// GET: api/SpeciesData/ListSpecies
-        /// </example>
+       
         [HttpGet]
         [ResponseType(typeof(ReviewDto))]
         public IHttpActionResult ListSpecies()
@@ -45,19 +36,7 @@ namespace Movie_App_2._0.Controllers
             return Ok(ReviewDtos);
         }
 
-        /// <summary>
-        /// Returns all Speciess in the system.
-        /// </summary>
-        /// <returns>
-        /// HEADER: 200 (OK)
-        /// CONTENT: An Species in the system matching up to the Species ID primary key
-        /// or
-        /// HEADER: 404 (NOT FOUND)
-        /// </returns>
-        /// <param name="id">The primary key of the Species</param>
-        /// <example>
-        /// GET: api/SpeciesData/FindSpecies/5
-        /// </example>
+      
         [ResponseType(typeof(ReviewDto))]
         [HttpGet]
         public IHttpActionResult FindReview(int id)
@@ -77,22 +56,7 @@ namespace Movie_App_2._0.Controllers
             return Ok(ReviewDto);
         }
 
-        /// <summary>
-        /// Updates a particular Species in the system with POST Data input
-        /// </summary>
-        /// <param name="id">Represents the Species ID primary key</param>
-        /// <param name="Species">JSON FORM DATA of an Species</param>
-        /// <returns>
-        /// HEADER: 204 (Success, No Content Response)
-        /// or
-        /// HEADER: 400 (Bad Request)
-        /// or
-        /// HEADER: 404 (Not Found)
-        /// </returns>
-        /// <example>
-        /// POST: api/SpeciesData/UpdateSpecies/5
-        /// FORM DATA: Species JSON Object
-        /// </example>
+ 
         [ResponseType(typeof(void))]
         [HttpPost]
         public IHttpActionResult UpadteReview(int id, Reviews Reviews)
@@ -128,20 +92,7 @@ namespace Movie_App_2._0.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        /// <summary>
-        /// Adds an Species to the system
-        /// </summary>
-        /// <param name="Species">JSON FORM DATA of an Species</param>
-        /// <returns>
-        /// HEADER: 201 (Created)
-        /// CONTENT: Species ID, Species Data
-        /// or
-        /// HEADER: 400 (Bad Request)
-        /// </returns>
-        /// <example>
-        /// POST: api/SpeciesData/AddSpecies
-        /// FORM DATA: Species JSON Object
-        /// </example>
+    
         [ResponseType(typeof(Reviews))]
         [HttpPost]
         public IHttpActionResult AddSpecies(Reviews Reviews)

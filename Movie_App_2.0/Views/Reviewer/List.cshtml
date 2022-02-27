@@ -5,8 +5,8 @@
 
 <h2>List</h2>
 <a href="/Reviewer/New">New Reviewer</a>
-@foreach (var Reviewer in Model)
+@foreach (var review in Model)
 {
-    <<h2><a href="/Reviewer/Details/@Reviewer.ReviewerID">@Reviewer.ReviewerLastName, @Reviewer.ReviewerFirstName></a></h2>
+    <<h2><a href="/Reviewer/Details/@review.ReviewerID">@review.ReviewerLastName, @review.ReviewerFirstName></a></h2>
 
 }

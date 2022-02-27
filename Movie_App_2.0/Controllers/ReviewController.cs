@@ -39,9 +39,7 @@ namespace Movie_App_2._0.Controllers
         // GET: Review/Create
         public ActionResult Details(int id)
         {
-            //objective: communicate with our Species data api to retrieve one Species
-            //curl https://localhost:44375/api/Speciesdata/findspecies/{id}
-
+           
             DetailsReview ViewModel = new DetailsReview();
 
             string url = "reviewdata/findreview/" + id;
@@ -51,13 +49,11 @@ namespace Movie_App_2._0.Controllers
             Debug.WriteLine(response.StatusCode);
 
             ReviewDto SelectedReview = response.Content.ReadAsAsync<ReviewDto>().Result;
-            Debug.WriteLine("Species received : ");
-            Debug.WriteLine(SelectedReview.ReviewTitle);
+           
 
             ViewModel.SelectedReview = SelectedReview;
 
-            //showcase information about animals related to this species
-            //send a request to gather information about animals related to a particular species ID
+          
             url = "moviedata/listmoviesforreview/" + id;
             response = client.GetAsync(url).Result;
             IEnumerable<MovieDto> RelatedMovies = response.Content.ReadAsAsync<IEnumerable<MovieDto>>().Result;
@@ -74,7 +70,7 @@ namespace Movie_App_2._0.Controllers
             return View();
         }
 
-        // GET: Species/New
+        // GET: Review/New
         public ActionResult New()
         {
             return View();
@@ -84,9 +80,6 @@ namespace Movie_App_2._0.Controllers
         public ActionResult Create(Reviews Review)
         {
             Debug.WriteLine("the json payload is :");
-            //Debug.WriteLine(Species.SpeciesName);
-            //objective: add a new Species into our system using the API
-            //curl -H "Content-Type:application/json" -d @Species.json https://localhost:44375/api/Speciesdata/addSpecies 
             string url = "reviewdata/addreview";
 
 

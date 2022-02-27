@@ -10,7 +10,7 @@
 <br />
 <a style="color:#ab2020;" href="/Movie/DeleteConfirm/@Model.SelectedMovie.MovieID">Delete</a>
 <h2>@Model.SelectedMovie.MovieTitle</h2>
-<div>Country: @Model.SelectedMovie.MovieOrigin kg</div>
+<div>Country: @Model.SelectedMovie.MovieOrigin</div>
 <div>Rating: @Model.SelectedMovie.ReviewTitle</div>
 
 <div>
@@ -24,7 +24,7 @@
 
     <div>
         <h4>Add new Reviewer to rate for @Model.SelectedMovie.MovieTitle</h4>
-        <form method="POST" action="/Animal/Associate/@Model.SelectedMovie.MovieID">
+        <form method="POST" action="/Movie/Associate/@Model.SelectedMovie.MovieID">
             <select name="ReviewerID">
                 @foreach (var reviewer in Model.AvailableReviewers)
                 {

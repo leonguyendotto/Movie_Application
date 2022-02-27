@@ -38,17 +38,7 @@ namespace Movie_App_2._0.Controllers
             return Ok(MovieDtos);
         }
 
-        /// <summary>
-        /// Gathers information about all animals related to a particular species ID
-        /// </summary>
-        /// <returns>
-        /// HEADER: 200 (OK)
-        /// CONTENT: all animals in the database, including their associated species matched with a particular species ID
-        /// </returns>
-        /// <param name="id">Species ID.</param>
-        /// <example>
-        /// GET: api/AnimalData/ListAnimalsForSpecies/3
-        /// </example>
+    
         [HttpGet]
         [ResponseType(typeof(MovieDto))]
         public IHttpActionResult ListMoviesForReviews(int id)
@@ -68,22 +58,12 @@ namespace Movie_App_2._0.Controllers
             return Ok(MovieDtos);
         }
 
-        /// <summary>
-        /// Gathers information about animals related to a particular keeper
-        /// </summary>
-        /// <returns>
-        /// HEADER: 200 (OK)
-        /// CONTENT: all animals in the database, including their associated species that match to a particular keeper id
-        /// </returns>
-        /// <param name="id">Keeper ID.</param>
-        /// <example>
-        /// GET: api/AnimalData/ListAnimalsForKeeper/1
-        /// </example>
+        
         [HttpGet]
         [ResponseType(typeof(MovieDto))]
         public IHttpActionResult ListAnimalsForKeeper(int id)
         {
-            //all animals that have keepers which match with our ID
+          
             List<Movie> Movies = db.Movies.Where(
                 a => a.Reviewers.Any(
                     k => k.ReviewerID == id
@@ -102,19 +82,6 @@ namespace Movie_App_2._0.Controllers
             return Ok(MovieDtos);
         }
 
-        /// <summary>
-        /// Associates a particular keeper with a particular animal
-        /// </summary>
-        /// <param name="animalid">The animal ID primary key</param>
-        /// <param name="keeperid">The keeper ID primary key</param>
-        /// <returns>
-        /// HEADER: 200 (OK)
-        /// or
-        /// HEADER: 404 (NOT FOUND)
-        /// </returns>
-        /// <example>
-        /// POST api/AnimalData/AssociateAnimalWithKeeper/9/1
-        /// </example>
         [HttpPost]
         [Route("api/MovieData/AssociateMovieWithReviewer/{movieid}/{reviewerid}")]
         public IHttpActionResult AssociateMovieWithReviewer(int movieid, int reviewerid)
@@ -134,19 +101,7 @@ namespace Movie_App_2._0.Controllers
             return Ok();
         }
 
-        /// <summary>
-        /// Removes an association between a particular keeper and a particular animal
-        /// </summary>
-        /// <param name="animalid">The animal ID primary key</param>
-        /// <param name="keeperid">The keeper ID primary key</param>
-        /// <returns>
-        /// HEADER: 200 (OK)
-        /// or
-        /// HEADER: 404 (NOT FOUND)
-        /// </returns>
-        /// <example>
-        /// POST api/AnimalData/AssociateAnimalWithKeeper/9/1
-        /// </example>
+     
         [HttpPost]
         [Route("api/MovieData/UnAssociateMovieWithReviewer/{movieid}/{reviwerid}")]
         public IHttpActionResult UnAssociateAnimalWithKeeper(int movieid, int reviewerid)
@@ -226,20 +181,7 @@ namespace Movie_App_2._0.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-        /// <summary>
-        /// Add an movie to the system 
-        /// </summary>
-        /// <param name="movie">Json form data of an movie</param>
-        /// <returns>
-        /// HEADER: 201 (CREATED) - if a create successed 
-        /// CONTENT: Movie ID, Movie Data
-        /// or
-        /// HEADER: 400 (BAD REQUEST) - if a create failed
-        /// </returns>
-        /// <example>
-        /// POST: api/moviedata/addmovie
-        /// FORM DATA: Movie JSON Object
-        /// </example>
+       
         [ResponseType(typeof(Movie))]
         [HttpPost]
         public IHttpActionResult AddMovie(Movie movie)

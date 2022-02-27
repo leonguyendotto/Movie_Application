@@ -58,13 +58,13 @@ namespace Movie_App_2._0.Controllers
             Debug.WriteLine("The response code is ");
             Debug.WriteLine(response.StatusCode);
 
-            ReviewerDto SelectedReviwer = response.Content.ReadAsAsync<ReviewerDto>().Result;
+            ReviewerDto SelectedReviewer = response.Content.ReadAsAsync<ReviewerDto>().Result;
            
 
-            ViewModel.SelectedReviwer = SelectedReviwer;
+            ViewModel.SelectedReviewer = SelectedReviewer;
 
-            //show all animals under the care of this keeper
-            url = "animaldata/listanimalsforkeeper/" + id;
+            //show all movie under the care of this reviewer
+            url = "moviedata/listmovieforreviewer/" + id;
             response = client.GetAsync(url).Result;
             IEnumerable<MovieDto> KeptMovies = response.Content.ReadAsAsync<IEnumerable<MovieDto>>().Result;
 
