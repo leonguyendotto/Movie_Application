@@ -115,7 +115,7 @@ namespace Movie_App_2._0.Controllers
         /// </example>
         [ResponseType(typeof(ReviewerDto))]
         [HttpGet]
-        public IHttpActionResult FindKeeper(int id)
+        public IHttpActionResult FindReviewer(int id)
         {
             Reviewer Reviewer = db.Reviewers.Find(id);
             ReviewerDto ReviewerDto = new ReviewerDto()

@@ -342,7 +342,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Keeper\" />
     <Folder Include="Views\ReviewData\" />
   </ItemGroup>
   <ItemGroup>

@@ -52,7 +52,7 @@ namespace Movie_App_2._0.Controllers
             //objective: communicate with our Keeper data api to retrieve one Keeper
             //curl https://localhost:44324/api/Keeperdata/findkeeper/{id}
 
-            string url = "reviwerdata/findReviewer/" + id;
+            string url = "reviewerdata/findreviewer/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             Debug.WriteLine("The response code is ");
@@ -64,7 +64,7 @@ namespace Movie_App_2._0.Controllers
             ViewModel.SelectedReviewer = SelectedReviewer;
 
             //show all movie under the care of this reviewer
-            url = "moviedata/listmovieforreviewer/" + id;
+            url = "moviedata/listmoviesforreviewer/" + id;
             response = client.GetAsync(url).Result;
             IEnumerable<MovieDto> KeptMovies = response.Content.ReadAsAsync<IEnumerable<MovieDto>>().Result;
 

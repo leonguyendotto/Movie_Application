@@ -21,7 +21,7 @@ namespace Movie_App_2._0.Controllers
        
         [HttpGet]
         [ResponseType(typeof(ReviewDto))]
-        public IHttpActionResult ListSpecies()
+        public IHttpActionResult ListReviews()
         {
             List<Reviews> Reviews = db.Reviews.ToList();
             List<ReviewDto> ReviewDtos = new List<ReviewDto>();

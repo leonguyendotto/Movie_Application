@@ -61,7 +61,7 @@ namespace Movie_App_2._0.Controllers
         
         [HttpGet]
         [ResponseType(typeof(MovieDto))]
-        public IHttpActionResult ListAnimalsForKeeper(int id)
+        public IHttpActionResult ListMoviesForReviewer(int id)
         {
           
             List<Movie> Movies = db.Movies.Where(

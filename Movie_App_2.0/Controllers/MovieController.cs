@@ -121,8 +121,9 @@ namespace Movie_App_2._0.Controllers
             //information about all review in the system.
             //GET api/reviewdata/listreview
 
-            string url = "reviewdata/listreview";
+            string url = "reviewdata/listreviews";
             HttpResponseMessage response = client.GetAsync(url).Result;
+            // Which results - I can't match the response with I expected in the review object
             IEnumerable<ReviewDto> ReviewOptions = response.Content.ReadAsAsync<IEnumerable<ReviewDto>>().Result;
 
             return View(ReviewOptions);
@@ -166,7 +167,7 @@ namespace Movie_App_2._0.Controllers
 
 
             //the existing movie information
-            string url = "moviedata/findmovie/" + id;
+            string url = "moviedata/findmovies/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             MovieDto SelectedMovie = response.Content.ReadAsAsync<MovieDto>().Result;
             ViewModel.SelectedMovie = SelectedMovie;
@@ -174,7 +175,7 @@ namespace Movie_App_2._0.Controllers
 
             //all reviews to choose from when updating this movie
             //the existing movie information
-            url = "reviewdata/listreview/";
+            url = "reviewdata/listreviews/";
             response = client.GetAsync(url).Result;
             IEnumerable<ReviewDto> ReviewOptions = response.Content.ReadAsAsync<IEnumerable<ReviewDto>>().Result;
 
@@ -217,7 +218,7 @@ namespace Movie_App_2._0.Controllers
         [HttpPost]
         public ActionResult Delete(int id)
         {
-            string url = "moviedata/deleteanimal/" + id;
+            string url = "moviedata/deletemovie/" + id;
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
             HttpResponseMessage response = client.PostAsync(url, content).Result;
@@ -228,6 +229,7 @@ namespace Movie_App_2._0.Controllers
             }
             else
             {
+                // the response is not successful 
                 return RedirectToAction("Error");
             }
 
