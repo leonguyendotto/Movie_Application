@@ -10,6 +10,8 @@ using Movie_App_2._0.Models.ViewModels;
 using System.Web.Script.Serialization;
 
 
+
+
 namespace Movie_App_2._0.Controllers
 {
     public class ReviewerController : Controller
@@ -74,9 +76,15 @@ namespace Movie_App_2._0.Controllers
             return View(ViewModel);
         }
 
+        public ActionResult Error()
+        {
+
+            return View();
+        }
+
 
         // GET: Reviewer/New
-        public ActionResult Error()
+        public ActionResult New()
         {
 
             return View();
@@ -123,11 +131,11 @@ namespace Movie_App_2._0.Controllers
 
         // POST: Reviewer/Update/5
         [HttpPost]
-        public ActionResult Update(int id, Reviewer Keeper)
+        public ActionResult Update(int id, Reviewer Reviewer)
         {
 
-            string url = "reviewerdata/updateviewer/" + id;
-            string jsonpayload = jss.Serialize(Keeper);
+            string url = "reviewerdata/updatereviewer/" + id;
+            string jsonpayload = jss.Serialize(Reviewer);
             HttpContent content = new StringContent(jsonpayload);
             content.Headers.ContentType.MediaType = "application/json";
             HttpResponseMessage response = client.PostAsync(url, content).Result;

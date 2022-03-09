@@ -99,7 +99,7 @@ namespace Movie_App_2._0.Controllers
         [HttpGet]
         public ActionResult UnAssociate(int id, int ReviewerID)
         {
-            Debug.WriteLine("Attempting to unassociate animal :" + id + " with reviewer: " + ReviewerID);
+            Debug.WriteLine("Attempting to unassociate movie :" + id + " with reviewer: " + ReviewerID);
 
             //call our api to associate movie with reviewer
             string url = "moviedata/unassociatemoviewithreviewer/" + id + "/" + ReviewerID;
