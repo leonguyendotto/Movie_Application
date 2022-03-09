@@ -117,7 +117,8 @@ namespace Movie_App_2._0.Controllers
         // GET: Reviewer/Edit/5
         public ActionResult Edit(int id)
         {
-            string url = "reviewerdata/findreviewer" + id;
+
+            string url = "reviewerdata/findreviewer/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             ReviewerDto selectedReviewer = response.Content.ReadAsAsync<ReviewerDto>().Result;
             return View(selectedReviewer);
@@ -131,7 +132,9 @@ namespace Movie_App_2._0.Controllers
             string url = "reviewerdata/updatereviewer/" + id;
             string jsonpayload = jss.Serialize(Reviewer);
             HttpContent content = new StringContent(jsonpayload);
+
             content.Headers.ContentType.MediaType = "application/json";
+
             HttpResponseMessage response = client.PostAsync(url, content).Result;
             Debug.WriteLine(content);
             if (response.IsSuccessStatusCode)

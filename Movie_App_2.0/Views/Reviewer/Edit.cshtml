@@ -1,9 +1,11 @@
 ﻿@model Movie_App_2._0.Models.ReviewerDto
+
 @{
     ViewBag.Title = "Edit";
 }
 
 <h2>Update Reviewer</h2>
+<a href="/Reviewer/List">Go back to reviewer list</a>
 <form action="/Reviewer/Update/@Model.ReviewerID" method="POST">
     <div style="display:none;">
         @* Pass through the Reviewer ID *@

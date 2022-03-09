@@ -101,20 +101,20 @@ namespace Movie_App_2._0.Controllers
 
         [ResponseType(typeof(void))]
         [HttpPost]
-        public IHttpActionResult UpdateReviewer(int id, Reviewer reviewer)
+        public IHttpActionResult UpdateReviewer(int id, Reviewer Reviewer)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != reviewer.ReviewerID)
+            if (id != Reviewer.ReviewerID)
             {
 
                 return BadRequest();
             }
 
-            db.Entry(reviewer).State = EntityState.Modified;
+            db.Entry(Reviewer).State = EntityState.Modified;
 
             try
             {
