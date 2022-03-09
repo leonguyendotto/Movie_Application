@@ -149,7 +149,7 @@ namespace Movie_App_2._0.Controllers
         // POST: api/MovieData/UpdateMovie/5
         [ResponseType(typeof(void))]
         [HttpPost]
-        public IHttpActionResult UpdateMoive(int id, Movie movie)
+        public IHttpActionResult UpdateMovie(int id, Movie movie)
         {
             if (!ModelState.IsValid)
             {

@@ -51,9 +51,6 @@ namespace Movie_App_2._0.Controllers
         {
             DetailsReviewer ViewModel = new DetailsReviewer();
 
-            //objective: communicate with our Keeper data api to retrieve one Keeper
-            //curl https://localhost:44324/api/Keeperdata/findkeeper/{id}
-
             string url = "reviewerdata/findreviewer/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
@@ -95,9 +92,6 @@ namespace Movie_App_2._0.Controllers
         public ActionResult Create(Reviewer Reviewer)
         {
             Debug.WriteLine("the json payload is :");
-            //Debug.WriteLine(Keeper.KeeperName);
-            //objective: add a new Keeper into our system using the API
-            //curl -H "Content-Type:application/json" -d @Keeper.json https://localhost:44324/api/Keeperdata/addKeeper 
             string url = "reviewerdata/addreviewer";
 
 

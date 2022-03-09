@@ -119,7 +119,7 @@ namespace Movie_App_2._0.Controllers
         public ActionResult New()
         {
             //information about all review in the system.
-            //GET api/reviewdata/listreview
+            //GET api/reviewdata/listreviews
 
             string url = "reviewdata/listreviews";
             HttpResponseMessage response = client.GetAsync(url).Result;
@@ -167,7 +167,7 @@ namespace Movie_App_2._0.Controllers
 
 
             //the existing movie information
-            string url = "moviedata/findmovies/" + id;
+            string url = "moviedata/findmovie/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             MovieDto SelectedMovie = response.Content.ReadAsAsync<MovieDto>().Result;
             ViewModel.SelectedMovie = SelectedMovie;
