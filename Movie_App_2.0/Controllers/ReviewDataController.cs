@@ -59,7 +59,7 @@ namespace Movie_App_2._0.Controllers
  
         [ResponseType(typeof(void))]
         [HttpPost]
-        public IHttpActionResult UpadateReview(int id, Reviews Reviews)
+        public IHttpActionResult UpdateReview(int id, Reviews Reviews)
         {
             if (!ModelState.IsValid)
             {
@@ -113,7 +113,7 @@ namespace Movie_App_2._0.Controllers
         // DELETE: api/ReviewData/5
         [ResponseType(typeof(Reviews))]
         [HttpPost]
-        public IHttpActionResult DeleteReviews(int id)
+        public IHttpActionResult DeleteReview(int id)
         {
             Reviews Reviews = db.Reviews.Find(id);
             if (Reviews == null)

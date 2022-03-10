@@ -4,9 +4,9 @@
 }
 
 <h2>List</h2>
-<a href="/Movie/List">Go back to movie list</a>
+<a href="/Movie/List">Go back to Movie List</a>
 <br />
-<a href="/Reviewer/New">New Reviewer</a>
+<a href="/Reviewer/New">New reviewer</a>
 @foreach (var review in Model)
 {
     <<h2><a href="/Reviewer/Details/@review.ReviewerID">@review.ReviewerLastName, @review.ReviewerFirstName></a></h2>

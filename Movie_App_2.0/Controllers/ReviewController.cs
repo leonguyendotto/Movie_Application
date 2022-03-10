@@ -104,17 +104,18 @@ namespace Movie_App_2._0.Controllers
         {
             string url = "reviewdata/findreview/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-            ReviewDto selectedReview = response.Content.ReadAsAsync<ReviewDto>().Result;
-            return View(selectedReview);
+            ReviewDto SelectedReview = response.Content.ReadAsAsync<ReviewDto>().Result;
+            return View(SelectedReview);
         }
 
         // POST: Review/Update/5
         [HttpPost]
-        public ActionResult Update(int id, Reviews Reviews)
+        public ActionResult Update(int id, Reviews Review)
         {
 
             string url = "reviewdata/updatereview/" + id;
-            string jsonpayload = jss.Serialize(Reviews);
+            string jsonpayload = jss.Serialize(Review);
+
             HttpContent content = new StringContent(jsonpayload);
 
             content.Headers.ContentType.MediaType = "application/json";
@@ -136,8 +137,8 @@ namespace Movie_App_2._0.Controllers
         {
             string url = "reviewdata/findreview/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-            ReviewDto selectedReview = response.Content.ReadAsAsync<ReviewDto>().Result;
-            return View(selectedReview);
+            ReviewDto SelectedReview = response.Content.ReadAsAsync<ReviewDto>().Result;
+            return View(SelectedReview);
         }
         // POST: Review/Delete/5
         [HttpPost]
@@ -146,6 +147,7 @@ namespace Movie_App_2._0.Controllers
             string url = "reviewdata/deletereview/" + id;
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
+
             HttpResponseMessage response = client.PostAsync(url, content).Result;
 
             if (response.IsSuccessStatusCode)

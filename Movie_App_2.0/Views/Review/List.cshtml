@@ -4,7 +4,9 @@
 }
 
 <h2>List</h2>
-<a href="/Review/New">New Review</a>
+<a href="/Movie/List">Go back to Movie List</a>
+<br/>
+<a href="/Review/New">New review</a>
 @foreach (var review in Model)
 {
     <h2><a href="/Review/Details/@review.ReviewID">@review.ReviewTitle</a></h2>

@@ -5,11 +5,11 @@
     ViewBag.Title = "View";
 }
 
-<a href="/Review/List">Go back to list</a>
+<a href="/Review/List">Go back</a>
 <br />
 <a href="/Review/Edit/@Model.SelectedReview.ReviewID">Update</a>
 <br />
-<a style="color:#ab2020;" href="/Species/DeleteConfirm/@Model.SelectedReview.ReviewID">Delete</a>
+<a style="color:#ab2020;" href="/Review/DeleteConfirm/@Model.SelectedReview.ReviewID">Delete</a>
 <h2>Rating: @Model.SelectedReview.ReviewTitle</h2>
 <div>Status: @Model.SelectedReview.AlreadyPosted</div>
 
