@@ -59,7 +59,7 @@ namespace Movie_App_2._0.Controllers
  
         [ResponseType(typeof(void))]
         [HttpPost]
-        public IHttpActionResult UpadteReview(int id, Reviews Reviews)
+        public IHttpActionResult UpadateReview(int id, Reviews Reviews)
         {
             if (!ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace Movie_App_2._0.Controllers
     
         [ResponseType(typeof(Reviews))]
         [HttpPost]
-        public IHttpActionResult AddSpecies(Reviews Reviews)
+        public IHttpActionResult AddReview(Reviews Reviews)
         {
             if (!ModelState.IsValid)
             {

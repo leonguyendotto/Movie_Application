@@ -16,7 +16,7 @@
 
 <div style="margin-top:100px;">
     <h3>Movies related to this reviews</h3>
-    @foreach (var movie in Model.RelatedMovies)
+    @foreach (var movie in Model.RelatedMovie)
     {
         <a href="/Movie/Details/@movie.MovieID">@movie.MovieTitle</a>
 

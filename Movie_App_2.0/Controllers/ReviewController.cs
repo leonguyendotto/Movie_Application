@@ -36,7 +36,7 @@ namespace Movie_App_2._0.Controllers
             return View(Review);
         }
 
-        // GET: Review/Create
+        // GET: Review/Details/5
         public ActionResult Details(int id)
         {
            
@@ -52,13 +52,12 @@ namespace Movie_App_2._0.Controllers
            
 
             ViewModel.SelectedReview = SelectedReview;
-
           
-            url = "moviedata/listmoviesforreview/" + id;
+            url = "moviedata/listmoviesforreviews/" + id;
             response = client.GetAsync(url).Result;
-            IEnumerable<MovieDto> RelatedMovies = response.Content.ReadAsAsync<IEnumerable<MovieDto>>().Result;
+            IEnumerable<MovieDto> RelatedMovie = response.Content.ReadAsAsync<IEnumerable<MovieDto>>().Result;
 
-            ViewModel.RelatedMovies = RelatedMovies;
+            ViewModel.RelatedMovie = RelatedMovie;
 
 
             return View(ViewModel);
@@ -111,13 +110,15 @@ namespace Movie_App_2._0.Controllers
 
         // POST: Review/Update/5
         [HttpPost]
-        public ActionResult Update(int id, Reviews Review)
+        public ActionResult Update(int id, Reviews Reviews)
         {
 
             string url = "reviewdata/updatereview/" + id;
-            string jsonpayload = jss.Serialize(Review);
+            string jsonpayload = jss.Serialize(Reviews);
             HttpContent content = new StringContent(jsonpayload);
+
             content.Headers.ContentType.MediaType = "application/json";
+
             HttpResponseMessage response = client.PostAsync(url, content).Result;
             Debug.WriteLine(content);
             if (response.IsSuccessStatusCode)

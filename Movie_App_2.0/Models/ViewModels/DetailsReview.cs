@@ -12,6 +12,6 @@ namespace Movie_App_2._0.Models.ViewModels
         public ReviewDto SelectedReview { get; set; }
 
         //all of the related movies to that particular reviews
-        public IEnumerable<MovieDto> RelatedMovies { get; set; }
+        public IEnumerable<MovieDto> RelatedMovie { get; set; }
     }
 }
