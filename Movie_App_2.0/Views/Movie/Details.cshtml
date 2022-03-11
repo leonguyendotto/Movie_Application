@@ -4,35 +4,50 @@
 }
 
 
-<a href="/Movie/List">Go back</a>
-<br />
-<a href="/Movie/Edit/@Model.SelectedMovie.MovieID">Update</a>
-<br />
-<a style="color:#ab2020;" href="/Movie/DeleteConfirm/@Model.SelectedMovie.MovieID">Delete</a>
 <h2>@Model.SelectedMovie.MovieTitle</h2>
-<div>Country: @Model.SelectedMovie.MovieOrigin</div>
-<div>Rating: @Model.SelectedMovie.ReviewTitle</div>
+<nav>
+    <ul>
+        <li><a href="/Movie/List">Go back</a></li>
+        <li><a href="/Movie/Edit/@Model.SelectedMovie.MovieID">Update</a></li>
+        <li><a style="color:#ab2020;" href="/Movie/DeleteConfirm/@Model.SelectedMovie.MovieID">Delete</a></li>
+    </ul>
+</nav>
+<div class="row">
+    <div class="col-md-6 col-sm-12">
+        @{
+            string imageurl = "/Content/Images/Posters/default.jpg";
+            if (Model.SelectedMovie.MovieHasPic)
+            {
+                imageurl = "/Content/Images/Posters/" + Model.SelectedMovie.MovieID + "." + Model.SelectedMovie.PicExtension;
+            }
+        }
+        <div><img style="display:block; max-width:100%;" alt="@Model.SelectedMovie.MovieTitle" src="@imageurl" /></div>
+        <div>Country: @Model.SelectedMovie.MovieOrigin</div>
+        <div>Rating: @Model.SelectedMovie.ReviewTitle</div>
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <h3>Reviewers Responsible for @Model.SelectedMovie.MovieTitle:</h3>
+        @foreach (var reviewer in Model.ResponsibleReviewers)
+        {
 
-<div>
-    <h2>Reviewers Responsible for @Model.SelectedMovie.MovieTitle:</h2>
-    @foreach (var reviewer in Model.ResponsibleReviewers)
-    {
+            <a href="/Reviewer/Details/@reviewer.ReviewerID">@reviewer.ReviewerFirstName @reviewer.ReviewerLastName</a>
+            <a style="color:#ab2020;" href="/Movie/Unassociate/@Model.SelectedMovie.MovieID?ReviewerID=@reviewer.ReviewerID">[x]</a><br />
+        }
 
-        <a href="/Reviewer/Details/@reviewer.ReviewerID">@reviewer.ReviewerFirstName @reviewer.ReviewerLastName</a> 
-        <a style="color:#ab2020;" href="/Movie/Unassociate/@Model.SelectedMovie.MovieID?ReviewerID=@reviewer.ReviewerID">[x]</a><br />
-    }
+        <div>
+            <h4>Add new Reviewer to rate for @Model.SelectedMovie.MovieTitle</h4>
+            <form method="POST" action="/Movie/Associate/@Model.SelectedMovie.MovieID">
+                <select name="ReviewerID">
+                    @foreach (var reviewer in Model.AvailableReviewers)
+                    {
+                        <option value="@reviewer.ReviewerID">@reviewer.ReviewerFirstName @reviewer.ReviewerLastName</option>
+                    }
 
-    <div>
-        <h4>Add new Reviewer to rate for @Model.SelectedMovie.MovieTitle</h4>
-        <form method="POST" action="/Movie/Associate/@Model.SelectedMovie.MovieID">
-            <select name="ReviewerID">
-                @foreach (var reviewer in Model.AvailableReviewers)
-                {
-                    <option value="@reviewer.ReviewerID">@reviewer.ReviewerFirstName @reviewer.ReviewerLastName</option>
-                }
-
-            </select>
-            <input type="submit" value="Associate Reviewer" />
-        </form>
+                </select>
+                <input type="submit" value="Associate Reviewer" />
+            </form>
+        </div>
     </div>
 </div>
+
+

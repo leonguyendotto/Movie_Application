@@ -14,6 +14,12 @@ namespace Movie_App_2._0.Models
         public string MovieTitle { get; set; }
         public string MovieOrigin { get; set; }
 
+        //data needed for keeping track of poster images uploaded
+        //images deposited into /Content/Images/Posters/{id}.{extension}
+        public bool MovieHasPic { get; set; }
+        public string PicExtension { get; set; }
+
+
         //A review belongs to one movie
         //A movie can have many reviews 
 
@@ -33,5 +39,10 @@ namespace Movie_App_2._0.Models
         public string ReviewTitle { get; set; }
 
         public int ReviewID { get; set; }
+
+        //data needed for keeping track of poster images uploaded
+        //images deposited into /Content/Images/Posters/{id}.{extension}
+        public bool MovieHasPic { get; set; }
+        public string PicExtension { get; set; }
     }
 }

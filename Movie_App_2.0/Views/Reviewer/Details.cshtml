@@ -5,22 +5,25 @@
     ViewBag.Title = "View";
 }
 
-<a href="/Reviewer/List">Go back</a>
-<br />
-<a href="/Movie/List">Go back to Movie List</a>
-<br />
-<a href="/Reviewer/Edit/@Model.SelectedReviewer.ReviewerID">Update</a>
-<br />
-<a style="color:#ab2020;" href="/Reviewer/DeleteConfirm/@Model.SelectedReviewer.ReviewerID">Delete</a>
 <h2>@Model.SelectedReviewer.ReviewerLastName @Model.SelectedReviewer.ReviewerFirstName</h2>
+<nav>
+    <ul>
+        <li><a href="/Reviewer/List">Go back</a></li>
+        <li><a href="/Reviewer/Edit/@Model.SelectedReviewer.ReviewerID">Update</a></li>
+        <li><a style="color:#ab2020;" href="/Reviewer/DeleteConfirm/@Model.SelectedReviewer.ReviewerID">Delete</a></li>
+    </ul>
+</nav>
+<div class="row">
+    <div class="col-md-6 col-sm-12">
+        <div>First Name: @Model.SelectedReviewer.ReviewerFirstName</div>
+        <div>Last Name: @Model.SelectedReviewer.ReviewerLastName</div>
+    </div>
+    <div>
+        <h3>Responsible for:</h3>
+        @foreach (var movie in Model.KeptMovies)
+        {
+            <a href="/Movie/Details/@movie.MovieID">@movie.MovieTitle</a><br />
 
-
-
-<div>
-    <h3>Responsible for:</h3>
-    @foreach (var movie in Model.KeptMovies)
-    {
-        <a href="/Movie/Details/@movie.MovieID">@movie.MovieTitle</a><br />
-
-    }
+        }
+    </div>
 </div>

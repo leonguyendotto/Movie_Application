@@ -186,7 +186,7 @@ namespace Movie_App_2._0.Controllers
 
         // POST: Movie/Update/5
         [HttpPost]
-        public ActionResult Update(int id, Movie movie)
+        public ActionResult Update(int id, Movie movie, HttpPostedFileBase MoviePoster)
         {
             string url = "moviedata/updatemovie/" + id;
             string jsonpayload = jss.Serialize(movie);
@@ -195,8 +195,26 @@ namespace Movie_App_2._0.Controllers
             HttpResponseMessage response = client.PostAsync(url, content).Result;
             Debug.WriteLine(content);
 
-            if (response.IsSuccessStatusCode)
+
+            //update request is successful, and we have image data
+            if (response.IsSuccessStatusCode && MoviePoster != null)
             {
+                //Updating the animal picture as a separate request
+                Debug.WriteLine("Calling Update Image method.");
+                //Send over image data for player
+                url = "MovieData/UploadMoviePoster/" + id;
+                Debug.WriteLine("Received Movie Poster "+ MoviePoster.FileName);
+
+                MultipartFormDataContent requestcontent = new MultipartFormDataContent();
+                HttpContent imagecontent = new StreamContent(MoviePoster.InputStream);
+                requestcontent.Add(imagecontent, "MoviePoster", MoviePoster.FileName);
+                response = client.PostAsync(url, requestcontent).Result;
+
+                return RedirectToAction("List");
+            }
+            else if (response.IsSuccessStatusCode)
+            {
+                //No image upload, but update still successful
                 return RedirectToAction("List");
             }
             else

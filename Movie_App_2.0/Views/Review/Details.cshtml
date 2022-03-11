@@ -4,21 +4,26 @@
 @{
     ViewBag.Title = "View";
 }
-
-<a href="/Review/List">Go back</a>
-<br />
-<a href="/Review/Edit/@Model.SelectedReview.ReviewID">Update</a>
-<br />
-<a style="color:#ab2020;" href="/Review/DeleteConfirm/@Model.SelectedReview.ReviewID">Delete</a>
 <h2>Rating: @Model.SelectedReview.ReviewTitle</h2>
-<div>Status: @Model.SelectedReview.AlreadyPosted</div>
+<nav>
+    <ul>
+        <li><a href="/Review/List">Go back</a></li>
+        <li><a href="/Review/Edit/@Model.SelectedReview.ReviewID">Update</a></li>
+        <li><a style="color:#ab2020;" href="/Review/DeleteConfirm/@Model.SelectedReview.ReviewID">Delete</a></li>
+    </ul>
+</nav>
 
+<div class="row">
+    <div class="col-md-6 col-sm-12">
+        <div>Status: @Model.SelectedReview.AlreadyPosted</div>
+    </div>
 
-<div style="margin-top:100px;">
-    <h3>Movies related to this reviews</h3>
-    @foreach (var movie in Model.RelatedMovie)
-    {
-        <a href="/Movie/Details/@movie.MovieID">@movie.MovieTitle</a>
+    <div class="col-md-6 col-sm-12">
+        <h3> Our rating - @(Model.SelectedReview.ReviewTitle) - that is related to these movies:</h3>
+        @foreach (var movie in Model.RelatedMovie)
+        {
+            <a href="/Movie/Details/@movie.MovieID">@movie.MovieTitle</a>
 
-    }
+        }
+    </div>
 </div>

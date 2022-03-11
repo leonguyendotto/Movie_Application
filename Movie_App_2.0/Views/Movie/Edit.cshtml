@@ -4,32 +4,47 @@
 }
 
 <h2>Update Movie</h2>
-<form action="/Movie/Update/@Model.SelectedMovie.MovieID" method="POST">
-    <div style="display:none;">
-        @* Pass through the movie ID *@
-        <input type="text" name="MovieID" value="@Model.SelectedMovie.MovieID" />
-    </div>
-    <div>
-        <label>Name:</label> <input type="text" name="MovieTitle" value="@Model.SelectedMovie.MovieTitle" />
-    </div>
-    <div>
-        <label>Origins:</label> <input type="text" name="MovieOrigin" value="@Model.SelectedMovie.MovieOrigin" />
-    </div>
-    <div>
-        <label>Rating:</label>
+<nav>
+    <ul>
+        <li><a href="/Movie/List">Go back</a></li>
 
-        <select name="ReviewID">
-            @foreach (var review in Model.ReviewOptions)
-            {
-                string selected = "";
-                if (review.ReviewID == Model.SelectedMovie.ReviewID)
-                {
-                    selected = "selected";
-                }
-                <option value="@review.ReviewID" @selected>@review.ReviewTitle</option>
+        <li><a style="color:#ab2020;" href="/Movie/DeleteConfirm/@Model.SelectedMovie.MovieID">Delete</a></li>
+    </ul>
+</nav>
 
-            }
-        </select>
+<form action="/Movie/Update/@Model.SelectedMovie.MovieID" method="POST" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div style="display:none;">
+                @* Pass through the movie ID *@
+                <input type="text" name="MovieID" value="@Model.SelectedMovie.MovieID" />
+            </div>
+            <div>
+                <label>Name:</label> <input type="text" name="MovieTitle" value="@Model.SelectedMovie.MovieTitle" />
+            </div>
+            <div>
+                <label>Origins:</label> <input type="text" name="MovieOrigin" value="@Model.SelectedMovie.MovieOrigin" />
+            </div>
+            <div>
+                <label>Rating:</label>
+
+                <select name="ReviewID">
+                    @foreach (var review in Model.ReviewOptions)
+                    {
+                        string selected = "";
+                        if (review.ReviewID == Model.SelectedMovie.ReviewID)
+                        {
+                            selected = "selected";
+                        }
+                        <option value="@review.ReviewID" @selected>@review.ReviewTitle</option>
+
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <input type="file" name="MoviePoster" />
+        </div>
     </div>
     <div>
         <input type="submit" value="Update Movie" />

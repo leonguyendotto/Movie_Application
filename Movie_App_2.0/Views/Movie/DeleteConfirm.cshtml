@@ -5,12 +5,18 @@
 }
 
 <h2>Are you sure you want to delete this movie?</h2>
-<a href="/Movie/List">Cancel</a>
-<h2>@Model.MovieTitle</h2>
+<nav>
+    <ul>
+        <li><a href="/Movie/List">Cancel</a></li>
+        <li><a href="/Movie/Edit/@Model.MovieID">Update</a></li>
+    </ul>
+</nav>
+
+<h3>@Model.MovieTitle</h3>
 <div>Country: @Model.MovieOrigin (Origin)</div>
 <div>Review: @Model.ReviewTitle</div>
+
 <form action="/Movie/Delete/@Model.MovieID" method="POST">
     <input type="submit" value="Confirm Delete" />
-
 </form>
 

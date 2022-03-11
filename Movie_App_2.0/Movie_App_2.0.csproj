@@ -249,6 +249,10 @@
     <Compile Include="Migrations\202202110926035_reviewers-movies.designer.cs">
       <DependentUpon>202202110926035_reviewers-movies.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202203101837198_movieposter.cs" />
+    <Compile Include="Migrations\202203101837198_movieposter.Designer.cs">
+      <DependentUpon>202203101837198_movieposter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -341,6 +345,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\Posters\" />
     <Folder Include="Views\ReviewData\" />
   </ItemGroup>
   <ItemGroup>
@@ -368,6 +373,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202202110926035_reviewers-movies.resx">
       <DependentUpon>202202110926035_reviewers-movies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203101837198_movieposter.resx">
+      <DependentUpon>202203101837198_movieposter.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
